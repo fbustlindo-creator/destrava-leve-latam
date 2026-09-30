@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROTOCOLO LEVEZA CONTÍNUA (PÓS-28 DIAS) - Destrava Leve 28D</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
+
+    :root {
+      --emerald-dark: #064e3b;
+      --emerald-deep: #022c22;
+      --emerald: #059669;
+      --emerald-light: #10b981;
+      --emerald-subtle: #ecfdf5;
+      --emerald-border: #a7f3d0;
+      --gold: #d97706;
+      --gold-dark: #92400e;
+      --gold-light: #fef3c7;
+      --gold-border: #fcd34d;
+      --navy: #0f172a;
+      --slate: #334155;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html, body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      background-color: #e2e8f0;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Outer wrapper */
+    .book-container {
+      max-width: 880px;
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+      padding: 0 44px 60px;
+    }
+
+    /* Print bar */
+    .print-bar {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+      color: white;
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      border-bottom: 3px solid #d97706;
+    }
+    .print-bar-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .print-bar-info span { font-size: 26px; }
+    .print-bar-info strong { color: #fde68a; font-size: 15px; font-weight: 800; letter-spacing: 0.5px; }
+    .print-bar-info p { margin: 0; font-size: 12px; color: #94a3b8; }
+    .print-btn {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #78350f;
+      border: none;
+      padding: 11px 24px;
+      border-radius: 9999px;
+      font-weight: 800;
+      font-size: 13.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(217, 119, 6, 0.4);
+      transition: all 0.2s ease;
+    }
+    .print-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(217, 119, 6, 0.55);
+    }
+
+    /* Cover Page */
+    .cover-page {
+      margin: 0 -44px 0 -44px;
+      padding: 0;
+      background: #064e3b;
+      line-height: 0;
+      display: block;
+      page-break-after: always;
+      break-after: page;
+    }
+    .cover-page img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Editorial Section & Chapter Headers */
+    .chapter-hero {
+      background: linear-gradient(135deg, #064e3b 0%, #042f2e 100%);
+      color: white;
+      padding: 32px 36px;
+      border-radius: 16px;
+      margin: 40px 0 24px;
+      border-left: 8px solid #d97706;
+      box-shadow: 0 8px 24px rgba(6, 78, 59, 0.15);
+      page-break-before: always;
+      break-before: page;
+      break-inside: avoid;
+    }
+    .chapter-hero:first-of-type {
+      page-break-before: avoid;
+      break-before: avoid;
+      margin-top: 30px;
+    }
+    .chapter-hero-num {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fde68a;
+      background: rgba(217, 119, 6, 0.25);
+      padding: 4px 14px;
+      border-radius: 9999px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(253, 230, 138, 0.4);
+    }
+    .chapter-hero h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
+      line-height: 1.25;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .chapter-hero p {
+      color: #cbd5e1;
+      font-size: 14.5px;
+      margin: 0;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--emerald-dark);
+      line-height: 1.3;
+    }
+    h3 {
+      font-size: 19px;
+      margin: 20px 0 10px;
+      color: var(--emerald-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    p {
+      margin-bottom: 14px;
+      color: var(--text-muted);
+      font-size: 14.5px;
+      text-align: justify;
+    }
+    strong { color: var(--text-main); font-weight: 700; }
+
+    /* Policy Certificate Card */
+    .policy-cert {
+      border: 3px double #d97706;
+      background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin: 30px 0;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(217, 119, 6, 0.08);
+      break-inside: avoid;
+    }
+    .policy-seal {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 38px;
+      opacity: 0.9;
+    }
+    .policy-cert h3 {
+      font-size: 21px;
+      color: #78350f;
+      margin-bottom: 8px;
+    }
+    .policy-cert p {
+      color: #451a03;
+      font-size: 14px;
+    }
+
+    /* Cards & Layout Modules */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+    @media (max-width: 650px) {
+      .card-grid { grid-template-columns: 1fr; }
+    }
+
+    .info-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      break-inside: avoid;
+    }
+    .info-card.accent-emerald {
+      border-left: 5px solid var(--emerald);
+      background: #f0fdf4;
+    }
+    .info-card.accent-gold {
+      border-left: 5px solid var(--gold);
+      background: #fffbeb;
+    }
+    .info-card.accent-indigo {
+      border-left: 5px solid #6366f1;
+      background: #f5f3ff;
+    }
+    .info-card.accent-rose {
+      border-left: 5px solid #f43f5e;
+      background: #fff1f2;
+    }
+    .info-card h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+    .info-card p {
+      font-size: 13.5px;
+      margin-bottom: 0;
+      color: #334155;
+    }
+
+    /* Big Highlight Box */
+    .highlight-box {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border: 1.5px solid #86efac;
+      border-left: 6px solid var(--emerald);
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin: 22px 0;
+      break-inside: avoid;
+    }
+    .highlight-box h3 {
+      margin-top: 0;
+      color: var(--emerald-dark);
+      font-size: 18.5px;
+    }
+    .highlight-box p {
+      color: #064e3b;
+      margin-bottom: 8px;
+    }
+    .highlight-box p:last-child { margin-bottom: 0; }
+
+    /* Step Sequence Detail Cards */
+    .step-detail-card {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin-bottom: 20px;
+      position: relative;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+      break-inside: avoid;
+    }
+    .step-detail-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .step-badge-num {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(5, 150, 105, 0.35);
+    }
+    .step-detail-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--emerald-dark);
+      margin: 0;
+    }
+    .step-pill-time {
+      margin-left: auto;
+      padding: 4px 12px;
+      background: #e0f2fe;
+      color: #0369a1;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid #bae6fd;
+    }
+    .step-instruction-box {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 12px 0;
+      border: 1px solid #e2e8f0;
+    }
+    .step-instruction-box p {
+      font-size: 13.8px;
+      margin-bottom: 6px;
+    }
+    .step-instruction-box p:last-child { margin-bottom: 0; }
+    .step-target-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #059669;
+      background: #ecfdf5;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #a7f3d0;
+    }
+
+    /* 7 Critical Zones Cards */
+    .zone-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      break-inside: avoid;
+    }
+    .zone-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #fef3c7;
+      color: #d97706;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      border: 1px solid #fde68a;
+    }
+    .zone-content { flex: 1; }
+    .zone-content h4 {
+      font-size: 16px;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .zone-content p {
+      font-size: 13.5px;
+      margin-bottom: 6px;
+      color: #475569;
+    }
+    .zone-fix {
+      font-size: 12.8px;
+      font-weight: 600;
+      color: #059669;
+      background: #f0fdf4;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    /* Full Schedule Table */
+    .rich-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1.5px solid #cbd5e1;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      break-inside: avoid;
+    }
+    .rich-table th {
+      background: #064e3b;
+      color: white;
+      padding: 13px 16px;
+      font-size: 13px;
+      text-align: left;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .rich-table td {
+      padding: 13px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 13.5px;
+      vertical-align: middle;
+    }
+    .rich-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+    .rich-table tr:last-child td {
+      border-bottom: none;
+    }
+    .checkbox-box {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #059669;
+      border-radius: 4px;
+      margin-right: 8px;
+      vertical-align: sub;
+      background: #fff;
+    }
+
+    /* 52-Week Tracker Grid */
+    .tracker-year-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+      break-inside: avoid;
+    }
+    .tracker-month-card {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .tracker-month-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #064e3b;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .tracker-weeks {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .tracker-week-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #475569;
+    }
+    .tracker-circle {
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid #059669;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    /* Running Footer & Guarantee */
+    .guarantee-footer-banner {
+      background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 28px 32px;
+      text-align: center;
+      margin-top: 36px;
+      border: 2px solid #d97706;
+      box-shadow: 0 6px 24px rgba(6, 78, 59, 0.2);
+      break-inside: avoid;
+    }
+    .guarantee-footer-banner h3 {
+      color: #fde68a;
+      font-size: 20px;
+      margin-bottom: 8px;
+      justify-content: center;
+    }
+    .guarantee-footer-banner p {
+      color: #cbd5e1;
+      font-size: 13.5px;
+      margin: 0;
+      text-align: center;
+    }
+
+    /* STRICT PRINT ENGINE CONTROLS */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 14mm 16mm 16mm 16mm;
+      }
+      @page :first {
+        margin: 0 !important;
+      }
+      html, body {
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .no-print,
+      .print-bar,
+      #print-bar {
+        display: none !important;
+        visibility: hidden !important;
+        position: absolute !important;
+        top: -99999px !important;
+        left: -99999px !important;
+        height: 0 !important;
+        width: 0 !important;
+        opacity: 0 !important;
+        overflow: hidden !important;
+      }
+      .book-container {
+        max-width: 100% !important;
+        width: 100% !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      /* Prevent cover blank page */
+      .cover-page {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        overflow: hidden !important;
+      }
+      .cover-page img {
+        width: 100vw !important;
+        height: 100vh !important;
+        object-fit: fill !important;
+        display: block !important;
+      }
+      .chapter-hero {
+        page-break-before: always !important;
+        break-before: page !important;
+        margin-top: 0 !important;
+      }
+      .chapter-hero:first-of-type {
+        page-break-before: avoid !important;
+        break-before: avoid !important;
+      }
+      .step-detail-card,
+      .info-card,
+      .highlight-box,
+      .policy-cert,
+      .zone-card,
+      .rich-table,
+      .tracker-year-grid,
+      .guarantee-footer-banner {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Print Bar: 100% hidden in print engine -->
+  <aside id="print-bar" class="print-bar no-print" data-no-print="true">
+    <div class="print-bar-info">
+      <span>🌿</span>
+      <div>
+        <strong>PROTOCOLO LEVEZA CONTÍNUA (PÓS-28 DIAS)</strong>
+        <p>Guia Prático de Manutenção de Hábitos • Destrava Leve 28D</p>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨️ Salvar como PDF / Imprimir</button>
+  </aside>
+
+  <div class="book-container">
+
+    <!-- FULL BLEED COVER: Page 1 -->
+    <header class="cover-page">
+      <img src="/capa-manual-seguro.jpg" alt="Capa Oficial Protocolo Leveza Contínua Pós-28 Dias">
+    </header>
+
+    <!-- OFFICIAL POLICY CERTIFICATE -->
+    <div class="policy-cert">
+      <div class="policy-seal">🌿</div>
+      <h3>Certificado de Continuidade e Manutenção de Hábitos</h3>
+      <p style="margin-bottom: 6px;"><strong>Aluna Concluinte:</strong> Destrava Leve 28D</p>
+      <p style="margin-bottom: 6px;"><strong>Compromisso de Autocuidado:</strong> Sustentação da rotina leve, manutenção da fáscia hidratada e estímulo da drenagem natural semanal.</p>
+      <p style="margin: 0; font-size: 13px; color: #78350f;"><em>"A verdadeira conquista dos 28 dias é integrar o autocuidado como um estilo de vida sustentável, dedicando apenas 5 minutos em 1 único dia da semana para manter o corpo livre de tensões acumuladas."</em></p>
+    </div>
+
+    <!-- MÓDULO 1 -->
+    <section class="chapter-hero">
+      <span class="chapter-hero-num">Módulo 1 • Fundamento Biológico</span>
+      <h2>A Ciência do Dia 29: A "Memória da Fáscia" & A Sustentação dos Hábitos</h2>
+      <p>Como a consistência e a mobilidade somática leve ajudam a manter sua postura alinhada e o corpo descontraído a longo prazo.</p>
+    </section>
+
+    <p>Parabéns por concluir os 28 dias do <strong>Destrava Leve</strong>! Ao longo deste último mês, uma verdadeira revolução silenciosa aconteceu sob a sua pele. O inchaço persistente na barriga não era gordura insolúvel: era linfa retida e fáscia desidratada que foram drenadas com as rotinas somáticas.</p>
+
+    <p>No entanto, agora que você cruzou a linha de chegada, surge o receio universal de qualquer mulher que já tentou emagrecer ou desinchar no passado: <strong>"E agora no Dia 29? O inchaço vai voltar se eu parar de fazer as aulas diárias?"</strong></p>
+
+    <div class="highlight-box">
+      <h3>🔬 O Segredo Biológico da Tixotropia Fascial</h3>
+      <p>A fáscia humana não é um músculo rígido, mas uma teia de tecido conjuntivo embebida em gel de ácido hialurônico e água. Ela obedece a um princípio físico chamado <strong>Tixotropia</strong>:</p>
+      <p>✦ <strong>Em Movimento Somático Leve:</strong> O gel fascial se liquefaz, torna-se flexível como seda e permite que todos os canais linfáticos fluam livremente em direção aos rins.</p>
+      <p>✦ <strong>Em Estagnação Total:</strong> Se você passar semanas sentada ou estressada sem nenhum estímulo, o gel engrossa, torna-se viscoso e volta a prender toxinas e água nos tecidos.</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="info-card accent-emerald">
+        <h4>✅ A Memória Celular Fixada</h4>
+        <p>Após 28 dias consecutivos, seu corpo já aprendeu o novo padrão de alinhamento e respiração. Você <strong>não precisa</strong> de treinos exaustivos todos os dias. Um único estímulo semanal de 5 minutos é suficiente para reativar essa conexão neuromuscular.</p>
+      </div>
+      <div class="info-card accent-gold">
+        <h4>⚡ A Regra de Ouro dos 5 Minutos</h4>
+        <p>A ciência da biomecânica comprova: <strong>5 minutos de descompressão por semana</strong> são suficientes para impedir que o colágeno crie novas aderências dolorosas na lombar e no pescoço.</p>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2 -->
+    <section class="chapter-hero">
+      <span class="chapter-hero-num">Módulo 2 • O Protocolo Central</span>
+      <h2>O Protocolo Semanal de Manutenção (1x na Semana — 5 Minutos)</h2>
+      <p>O ritual prático das alunas: execute uma única vez por semana para preservar sua leveza, mobilidade e bem-estar contínuo.</p>
+    </section>
+
+    <p>Escolha o seu dia de compromisso com a sua rotina de manutenção. A grande maioria das nossas alunas escolhe o <strong>Domingo à Noite</strong> (para deitar com a mente relaxada e começar a semana sem peso) ou a <strong>Segunda-feira de Manhã</strong> (para acordar o corpo e ativar o metabolismo semanal). Faça onde preferir: no tapete da sala ou na própria cama.</p>
+
+    <!-- Sequência 1 -->
+    <article class="step-detail-card">
+      <div class="step-detail-header">
+        <div class="step-badge-num">1</div>
+        <div>
+          <h3 class="step-detail-title">Descompressão Sacro-Lombar & Nervo Vago</h3>
+          <span class="step-target-badge">🎯 Foco: Descompressão L4-L5 e Desativação do Cortisol</span>
+        </div>
+        <span class="step-pill-time">60 segundos</span>
+      </div>
+      <div class="step-instruction-box">
+        <p><strong>Posição Inicial:</strong> Deitada de costas na cama ou tapete, joelhos dobrados e pés apoiados no chão na largura dos quadris. Mãos repousando suavemente sobre a nuca ou ao lado do corpo.</p>
+        <p><strong>Execução Somática:</strong> Inspire profundamente pelo nariz durante 4 segundos expandindo a barriga como um balão. Ao expirar lentamente pela boca (em 6 segundos), faça uma leve báscula do quadril, empurrando o osso sacro e a curva lombar contra o colchão. Sinta o alívio imediato na base das costas.</p>
+        <p><strong>Por que funciona:</strong> A pressão suave no sacro estimula as raízes nervosas parassimpáticas, desligando o sinal de alerta e inflamação do cérebro.</p>
+      </div>
+    </article>
+
+    <!-- Sequência 2 -->
+    <article class="step-detail-card">
+      <div class="step-detail-header">
+        <div class="step-badge-num">2</div>
+        <div>
+          <h3 class="step-detail-title">Bombeamento da Cisterna do Quilo</h3>
+          <span class="step-target-badge">🎯 Foco: Drenagem Linfática Profunda do Abdômen e Pernas</span>
+        </div>
+        <span class="step-pill-time">60 segundos</span>
+      </div>
+      <div class="step-instruction-box">
+        <p><strong>Posição Inicial:</strong> Permaneça deitada com joelhos dobrados. Espalme as duas mãos sobre o umbigo.</p>
+        <p><strong>Execução Somática:</strong> Solte absolutamente todo o ar dos pulmões até sentir a barriga esvaziar por completo. Sem puxar o ar por 3 segundos, faça uma leve sucção abdominal para dentro e para cima (manobra de vácuo diafragmático suave). Relaxe a barriga e volte a respirar normalmente. Repita por 5 ciclos respiratórios lentos.</p>
+        <p><strong>Por que funciona:</strong> O diafragma age como um pistão mecânico que desobstrui o ducto torácico e a Cisterna do Quilo, drenando todo o acúmulo de líquido que estagna nas coxas e abdômen inferior.</p>
+      </div>
+    </article>
+
+    <!-- Sequência 3 -->
+    <article class="step-detail-card">
+      <div class="step-detail-header">
+        <div class="step-badge-num">3</div>
+        <div>
+          <h3 class="step-detail-title">Espirais Fasciais de Retorno & Alinhamento</h3>
+          <span class="step-target-badge">🎯 Foco: Destravamento da Coluna Torácica, Ombros e Postura</span>
+        </div>
+        <span class="step-pill-time">60 segundos (30s cada lado)</span>
+      </div>
+      <div class="step-instruction-box">
+        <p><strong>Posição Inicial:</strong> Deitada de lado (posição fetal suave), com as duas mãos juntas esticadas à frente do peito.</p>
+        <p><strong>Execução Somática:</strong> Deslize o braço de cima desenhando um grande arco pelo ar, abrindo o peito em direção ao teto, enquanto sua cabeça acompanha o movimento suavemente com o olhar. Permaneça na torção suave por 3 respirações profundas sentindo as costelas se expandirem. Feche suavemente e troque de lado.</p>
+        <p><strong>Por que funciona:</strong> Hidrata as linhas espirais de fáscia que sustentam o tronco, impedindo a postura encurvada e o acúmulo de tensão nas escápulas.</p>
+      </div>
+    </article>
+
+    <!-- Sequência 4 -->
+    <article class="step-detail-card">
+      <div class="step-detail-header">
+        <div class="step-badge-num">4</div>
+        <div>
+          <h3 class="step-detail-title">Báscula Pélvica & Liberação dos Flexores do Quadril</h3>
+          <span class="step-target-badge">🎯 Foco: Alívio do Psoas e Descompressão do Nervo Ciático</span>
+        </div>
+        <span class="step-pill-time">60 segundos</span>
+      </div>
+      <div class="step-instruction-box">
+        <p><strong>Posição Inicial:</strong> De costas, estique uma perna no chão e traga o outro joelho de encontro ao peito, segurando-o suavemente com as duas mãos.</p>
+        <p><strong>Execução Somática:</strong> Não puxe com força. Apenas abrace o joelho e faça micro-movimentos circulares com o pé solto no ar por 30 segundos. Respire suavemente sentindo a virilha e o glúteo respirarem. Troque a perna.</p>
+        <p><strong>Por que funciona:</strong> Libera o músculo iliopsoas (o "músculo da alma"), que passa a semana inteira encurtado ao sentar na cadeira ou sofá, evitando crises de ciático e dor na bacia.</p>
+      </div>
+    </article>
+
+    <!-- Sequência 5 -->
+    <article class="step-detail-card">
+      <div class="step-detail-header">
+        <div class="step-badge-num">5</div>
+        <div>
+          <h3 class="step-detail-title">Dreno Gravitacional de Tornozelos & Fáscia Plantar</h3>
+          <span class="step-target-badge">🎯 Foco: Eliminação da Retenção nas Pernas e Estímulo da Microcirculação</span>
+        </div>
+        <span class="step-pill-time">60 segundos</span>
+      </div>
+      <div class="step-instruction-box">
+        <p><strong>Posição Inicial:</strong> Eleve as duas pernas para cima (pode apoiar os calcanhares na cabeceira da cama ou parede, ou simplesmente mantê-las erguidas).</p>
+        <p><strong>Execução Somática:</strong> Aponte a ponta dos dedos dos pés para o teto (ponta de bailarina) e depois puxe os dedos em direção às canelas (calcanhares para cima). Alterne esse movimento em ritmo compassado 20 vezes. Finalize sacudindo os pés e pernas levemente como se espantasse gotículas de água.</p>
+        <p><strong>Por que funciona:</strong> A contração da panturrilha combinada com a gravidade drena as veias safenas e o sistema linfático periférico, acordando pernas leves como plumas.</p>
+      </div>
+    </article>
+
+    <!-- MÓDULO 3 -->
+    <section class="chapter-hero">
+      <span class="chapter-hero-num">Módulo 3 • Arsenal de Alívio Rápido</span>
+      <h2>O Guia de Desbloqueio das 7 Zonas Críticas de Dor e Tensão</h2>
+      <p>Quando uma dor específica surgir durante a semana, consulte este índice para neutralizá-la em menos de 2 minutos.</p>
+    </section>
+
+    <!-- Zone 1 -->
+    <div class="zone-card">
+      <div class="zone-icon-box">💆‍♀️</div>
+      <div class="zone-content">
+        <h4>Zona 1: Pescoço Rígido, Trapézio & Cefaleia Tensional</h4>
+        <p>Causa: Horas no celular ou computador com a cabeça projetada para frente, sobrecarregando a fáscia suboccipital.</p>
+        <span class="zone-fix">✦ Antídoto: 10 rotações de queixo desenhando o infinito no ar com olhos fechados.</span>
+      </div>
+    </div>
+
+    <!-- Zone 2 -->
+    <div class="zone-card">
+      <div class="zone-icon-box">⚡</div>
+      <div class="zone-content">
+        <h4>Zona 2: Lombar Travada ao Levantar da Cama</h4>
+        <p>Causa: Encurtamento noturno do quadrado lombar e rigidez fascial na transição lombo-sacra.</p>
+        <span class="zone-fix">✦ Antídoto: Abraçar os dois joelhos deitada ainda na cama e balançar suavemente de lado como um pêndulo.</span>
+      </div>
+    </div>
+
+    <!-- Zone 3 -->
+    <div class="zone-card">
+      <div class="zone-icon-box">🦵</div>
+      <div class="zone-content">
+        <h4>Zona 3: Nervo Ciático & Glúteo em Fisgada</h4>
+        <p>Causa: Contratura do músculo piriforme comprimindo o nervo ciático por horas sentada.</p>
+        <span class="zone-fix">✦ Antídoto: Sentada em uma cadeira, cruze o tornozelo sobre o joelho oposto (posição 4) e incline o tronco à frente.</span>
+      </div>
+    </div>
+
+    <!-- Zone 4 -->
+    <div class="zone-card">
+      <div class="zone-icon-box">🫁</div>
+      <div class="zone-content">
+        <h4>Zona 4: Barriga Estufada & Diafragma Paralisado</h4>
+        <p>Causa: Estresse e ansiedade mantêm o diafragma bloqueado no topo, comprimindo os órgãos digestivos.</p>
+        <span class="zone-fix">✦ Antídoto: 5 respirações lentas com mãos nas costelas baixas, empurrando o ar para as laterais.</span>
+      </div>
+    </div>
+
+    <!-- Zone 5 -->
+    <div class="zone-card">
+      <div class="zone-icon-box">🌸</div>
+      <div class="zone-content">
+        <h4>Zona 5: Peso no Baixo Ventre & Pelve Congestionada</h4>
+        <p>Causa: Estagnação venosa na bacia por falta de mobilidade do assoalho pélvico.</p>
+        <span class="zone-fix">✦ Antídoto: Posição da Borboleta deitada (sola dos pés juntas e joelhos abertos) por 90 segundos.</span>
+      </div>
+    </div>
+
+    <!-- Zone 6 -->
+    <div class="zone-card">
+      <div class="zone-icon-box">🦶</div>
+      <div class="zone-content">
+        <h4>Zona 6: Joelhos Cansados & Tornozelos Inchados</h4>
+        <p>Causa: Dilatação dos vasos pelo calor e acúmulo de líquido intersticial nos membros inferiores.</p>
+        <span class="zone-fix">✦ Antídoto: 3 minutos com as pernas apoiadas verticalmente na parede antes do banho.</span>
+      </div>
+    </div>
+
+    <!-- Zone 7 -->
+    <div class="zone-card">
+      <div class="zone-icon-box">🌙</div>
+      <div class="zone-content">
+        <h4>Zona 7: Mandíbula Apertada, Bruxismo & Insônia</h4>
+        <p>Causa: O reflexo de "engolir o estresse" tensiona o músculo masseter e a fáscia temporal.</p>
+        <span class="zone-fix">✦ Antídoto: Pressione com a ponta dos nós dos dedos o ângulo da mandíbula enquanto abre a boca lentamente 5 vezes.</span>
+      </div>
+    </div>
+
+    <!-- MÓDULO 4 -->
+    <section class="chapter-hero">
+      <span class="chapter-hero-num">Módulo 4 • Protocolo Choque SOS</span>
+      <h2>O Botão de Emergência SOS: "Coma o que quiser no Fim de Semana"</h2>
+      <p>O plano de choque de 24 horas para zerar excessos de sal, massas, doces ou álcool sem culpa e sem desespero.</p>
+    </section>
+
+    <p>A vida real não foi feita para você viver em uma redoma de vidro. Você tem festas, aniversários, confraternizações, viagens e momentos deliciosos com a sua família. <strong>Nenhuma aluna do Destrava Leve precisa dizer não para um pedaço de bolo ou uma pizza no fim de semana por medo de estragar o progresso.</strong></p>
+
+    <p>O que acontece quando você exagera no sal ou no carboidrato? Cada grama de glicogênio liga-se a aproximadamente 3 a 4 gramas de água nos tecidos. Portanto, se você se pesar na segunda-feira e a balança mostrar 1,5 kg a mais, <strong>isso não é 1,5 kg de gordura! É pura água retida</strong>. Se você aplicar este cronograma na segunda-feira, esse líquido é 100% drenado antes de virar inchaço permanente.</p>
+
+    <table class="rich-table">
+      <thead>
+        <tr>
+          <th style="width: 22%;">Horário</th>
+          <th style="width: 48%;">Ação Prática de Choque SOS</th>
+          <th style="width: 30%;">Efeito Biológico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>07h30 — Jejum</strong></td>
+          <td>150ml água morna + suco de 1/2 limão + 1 pitada de cúrcuma + 1 pitada de gengibre em pó.</td>
+          <td>Alcaliniza o pH, ativa a bile hepática e acorda os filtros renais.</td>
+        </tr>
+        <tr>
+          <td><strong>10h30 — Lanche</strong></td>
+          <td>1 copo grande de água com rodelas de pepino e folhas de hortelã fresca macerada.</td>
+          <td>Ação diurética suave rica em potássio contra o excesso de sódio.</td>
+        </tr>
+        <tr>
+          <td><strong>13h30 — Almoço</strong></td>
+          <td>Almoço com abundância de folhas verdes escuras (rúcula, espinafre) e proteína magra. Zero ultraprocessados.</td>
+          <td>Nutrição celular sem sobrecarga glicêmica.</td>
+        </tr>
+        <tr>
+          <td><strong>16h30 — Dreno</strong></td>
+          <td><strong>O Dreno de Parede (3 minutos):</strong> Pernas elevadas na parede bombeando os tornozelos 30 vezes.</td>
+          <td>Drenagem mecânica do acúmulo de líquido que desce para as pernas.</td>
+        </tr>
+        <tr>
+          <td><strong>21h00 — Noite</strong></td>
+          <td>1 xícara morna de Infusão de Cavalinha com Maçã e Canela (do Guia de Chás).</td>
+          <td>Eliminação de resíduos metabólicos durante as 8 horas de sono.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <h3>✨ O Resultado na Terça-feira de Manhã</h3>
+      <p>Ao acordar na terça-feira, o seu corpo terá eliminado todo o excedente de sal e água retida pela urina. A barriga volta ao seu formato original, a cintura fica delineada e o seu peso volta ao baseline do final dos 28 dias.</p>
+    </div>
+
+    <!-- MÓDULO 5 -->
+    <section class="chapter-hero">
+      <span class="chapter-hero-num">Módulo 5 • Cronograma Vitalício</span>
+      <h2>As 4 Estações da Fáscia: Como Blindar seu Corpo o Ano Todo</h2>
+      <p>Como alternar os estímulos nos 12 meses do ano para manter a flexibilidade e o metabolismo ativo faça chuva ou faça sol.</p>
+    </section>
+
+    <div class="card-grid">
+      <div class="info-card accent-indigo">
+        <h4>❄️ Outono & Inverno (Foco: Descompressão Articular)</h4>
+        <p>Com as baixas temperaturas, o corpo tende a se encolher involuntariamente, enrijecendo trapézios e lombar. <strong>Ajuste:</strong> Faça o Protocolo Semanal sempre após o banho morno ou use uma bolsa de água quente na lombar por 5 minutos antes de começar.</p>
+      </div>
+      <div class="info-card accent-emerald">
+        <h4>☀️ Primavera & Verão (Foco: Drenagem Linfática)</h4>
+        <p>O calor intenso dilata as veias e retém fluidos por ação da gravidade, tornando as pernas pesadas no fim da tarde. <strong>Ajuste:</strong> Adicione o Dreno de Parede 2x na semana e aumente o consumo dos rituais cítricos e gelados de hibisco do seu guia.</p>
+      </div>
+      <div class="info-card accent-rose">
+        <h4>✈️ Viagens Longas & Dias Sentada</h4>
+        <p>Ficar horas a 90 graus comprime os gânglios da virilha. <strong>Ajuste:</strong> Ao chegar ao destino ou ao hotel, deite-se de costas e faça 10 respirações profundas abrindo os braços em cruz para desobstruir os canais linfáticos inguinais.</p>
+      </div>
+      <div class="info-card accent-gold">
+        <h4>🌸 Período Pré-Menstrual / TPM</h4>
+        <p>A oscilação de progesterona eleva a retenção hídrica em até 2 litros. <strong>Ajuste:</strong> Troque qualquer movimento brusco pela Sequência 1 (Descompressão Sacro-Lombar) e priorize a infusão de camomila com melissa.</p>
+      </div>
+    </div>
+
+    <!-- MÓDULO 6 -->
+    <section class="chapter-hero">
+      <span class="chapter-hero-num">Módulo 6 • Ferramentas Imprimíveis</span>
+      <h2>Ficha de Geladeira & Rastreador Anual de 52 Semanas</h2>
+      <p>Imprima as páginas a seguir para colocar na sua rotina diária e manter o controle visual do seu progresso.</p>
+    </section>
+
+    <h3>📋 Checklist de Geladeira (O Ritmo Perfeito da Semana)</h3>
+    <p>Corte ou imprima esta tabela e fixe com um ímã na porta da sua geladeira para nunca perder o fio da meada:</p>
+
+    <table class="rich-table">
+      <thead>
+        <tr>
+          <th style="width: 28%;">Dia / Momento</th>
+          <th style="width: 44%;">Micro-Hábito de Manutenção</th>
+          <th style="width: 28%;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Domingo à Noite</strong></td>
+          <td>5 minutos do Protocolo de Manutenção</td>
+          <td><span class="checkbox-box"></span> Feito com sucesso</td>
+        </tr>
+        <tr>
+          <td><strong>Segunda-feira</strong></td>
+          <td>1 copo de água morna com limão pela manhã</td>
+          <td><span class="checkbox-box"></span> Feito com sucesso</td>
+        </tr>
+        <tr>
+          <td><strong>Quarta-feira</strong></td>
+          <td>1 infusão noturna calmante (E-book de Chás)</td>
+          <td><span class="checkbox-box"></span> Feito com sucesso</td>
+        </tr>
+        <tr>
+          <td><strong>Sexta-feira</strong></td>
+          <td>3 minutos de Dreno na Parede após o trabalho</td>
+          <td><span class="checkbox-box"></span> Feito com sucesso</td>
+        </tr>
+        <tr>
+          <td><strong>Fim de Semana</strong></td>
+          <td>Viver leve, sem culpa e com liberdade</td>
+          <td><span class="checkbox-box"></span> Feito com sucesso</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 30px;">
+      <h3>🗓️ Rastreador Anual das 52 Semanas de Consistência</h3>
+      <p>Cada círculo representa 1 sessão de 5 minutos completada na semana. Ao longo de 12 meses, você terá preservado seu ritmo e bem-estar com apenas 4 horas e meia de autocuidado no ano todo!</p>
+
+      <div class="tracker-year-grid">
+        <!-- 12 Months -->
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 01</span><span>Janeiro</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 01</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 02</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 03</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 04</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 02</span><span>Fevereiro</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 05</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 06</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 07</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 08</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 03</span><span>Março</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 09</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 10</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 11</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 12</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 04</span><span>Abril</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 13</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 14</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 15</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 16</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 05</span><span>Maio</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 17</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 18</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 19</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 20</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 06</span><span>Junho</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 21</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 22</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 23</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 24</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 07</span><span>Julho</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 25</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 26</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 27</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 28</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 08</span><span>Agosto</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 29</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 30</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 31</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 32</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 09</span><span>Setembro</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 33</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 34</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 35</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 36</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 10</span><span>Outubro</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 37</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 38</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 39</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 40</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 11</span><span>Novembro</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 41</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 42</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 43</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 44</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+        <div class="tracker-month-card">
+          <div class="tracker-month-title"><span>Mês 12</span><span>Dezembro</span></div>
+          <div class="tracker-weeks">
+            <div class="tracker-week-row"><span>Semana 45</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 46</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 47</span><div class="tracker-circle"></div></div>
+            <div class="tracker-week-row"><span>Semana 48</span><div class="tracker-circle"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINAL GUARANTEE FOOTER -->
+    <div class="guarantee-footer-banner">
+      <h3>🌿 Protocolo Leveza Contínua</h3>
+      <p>Seu corpo aprendeu a viver leve, equilibrado e livre do acúmulo de tensões do dia a dia. O segredo do bem-estar contínuo não está em esforços extenuantes, mas na consistência amorosa de cuidar de si mesma por 5 minutos a cada 7 dias.</p>
+      <p style="margin-top: 12px; font-weight: 800; color: #fde68a; letter-spacing: 1px;">Destrava Leve 28D • Todos os direitos reservados</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
