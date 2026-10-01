@@ -256,27 +256,27 @@ export default function Home({ initialSlug }: { initialSlug?: string } = {}) {
       <article className="g1-card">
         <header className="g1-header-bar">
           <picture>
-            <source srcSet="/g1-header-ref.webp" type="image/webp" />
-            <img src="/g1-header-ref.png" alt="Bienestar 360" className="g1-header-img" />
+            <source srcSet="/infobae-header-ref.webp" type="image/webp" />
+            <img src="/infobae-header-ref.png" alt="Infobae Salud" className="g1-header-img" />
           </picture>
         </header>
 
         <div className="g1-body">
-          <span className="g1-kicker">NUEVO MÉTODO DESTRAVA LEVE</span>
+          <span className="g1-kicker">SALUD Y BIENESTAR</span>
           <h1 className="g1-headline">
-            &ldquo;Destrava Leve&rdquo;: Nueva Rutina de 7 Minutos de Liberación de la Fascia Ayuda a Mujeres a Aliviar la Sensación de Pesadez e Inflamación Corporal
+            &ldquo;Destrava Leve&rdquo;: El Método de 7 Minutos de Liberación Fascial que Ayuda a Miles de Mujeres a Desinflamar y Aliviar la Pesadez Corporal
           </h1>
           <p className="g1-lead">
-            Una práctica suave enfocada en liberar la fascia y estimular la relajación corporal ayuda a desarmar la rigidez diaria y devolver la ligereza, ideal para hacer en casa y sin esfuerzo excesivo.
+            Especialistas destacan cómo la liberación suave de la fascia combinada con la activación del nervio vago permite desarmar la rigidez crónica y recuperar la ligereza natural, todo desde casa y sin impacto articular.
           </p>
 
           <div className="g1-meta">
-            <span className="g1-byline"><strong>Por Bienestar 360</strong> | 19/09/2026 10:15 · Actualizado hace 1 hora</span>
+            <span className="g1-byline"><strong>Por Infobae Salud</strong> | Tendencias y Bienestar · Actualizado hace 1 hora</span>
           </div>
 
           <figure className="g1-figure">
             <img src="/materia-g1-destrava.jpg" alt="Mujer practicando estiramiento y liberación corporal suave en casa" />
-            <figcaption>Rutina diaria de 7 minutos enfocada en la liberación fascial suave para aliviar el cuerpo sin impacto ni fatiga excesiva. (Foto: Divulgación)</figcaption>
+            <figcaption>Rutina de 7 minutos diarios se enfoca en liberar la rigidez de la fascia para desinflamar el cuerpo sin exigencias de gimnasio. (Foto: Getty Images / Archivo)</figcaption>
           </figure>
 
           <div className="g1-share-bar" aria-label="Compartir artículo">
@@ -299,24 +299,24 @@ export default function Home({ initialSlug }: { initialSlug?: string } = {}) {
           <h2>¡Excelente noticia!</h2>
         </div>
         <p className="qualification-intro">
-          Con base en tus respuestas hasta aquí, eres exactamente el perfil para quien fue diseñado <strong>Destrava Leve</strong>:
+          Con base en tus respuestas hasta aquí, encajas perfectamente con el perfil para el que fue diseñado <strong>Destrava Leve</strong>:
         </p>
         <ul className="qualification-list">
           <li>
             <span className="q-check">✓</span>
-            <span>Ya probaste otros métodos sin sentir el cuerpo liviano y verdaderamente suelto</span>
+            <span>Has intentado otros métodos sin lograr que tu cuerpo se sienta realmente liviano y libre de tensión</span>
           </li>
           <li>
             <span className="q-check">✓</span>
-            <span>No tienes tiempo ni ganas para gimnasios o entrenamientos intensos</span>
+            <span>No tienes tiempo ni energía para rutinas agotadoras de gimnasio</span>
           </li>
           <li>
             <span className="q-check">✓</span>
-            <span>Sientes el cuerpo bloqueado, piernas pesadas o sensación de hinchazón constante</span>
+            <span>Sientes rigidez muscular, piernas pesadas o inflamación persistente en el abdomen</span>
           </li>
           <li>
             <span className="q-check">✓</span>
-            <span>Necesitas una rutina corta, segura y que respete los límites de tu cuerpo</span>
+            <span>Buscas una solución guiada, segura y de bajo impacto que puedas hacer desde casa</span>
           </li>
         </ul>
         <p className="qualification-note">Continúa — tu plan personalizado está siendo preparado.</p>
