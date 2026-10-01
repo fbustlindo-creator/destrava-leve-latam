@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Destrava Leve 28D — seu plano de liberação corporal',
-  description: 'Uma rotina guiada de 7 minutos por dia para voltar a sentir o corpo leve.',
+  title: 'Destrava Leve 28D — tu plan de liberación corporal',
+  description: 'Una rutina guiada de 7 minutos al día para volver a sentir el cuerpo liviano.',
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="es">
       <head>
         <script
           dangerouslySetInnerHTML={{

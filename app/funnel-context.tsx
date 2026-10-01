@@ -68,13 +68,13 @@ export function FunnelProvider({ children }: { children: React.ReactNode }) {
   const toggleMultiAnswer = (id: string, value: string, checked: boolean) => {
     setAnswers(prev => {
       const list = Array.isArray(prev[id]) ? (prev[id] as string[]) : [];
-      const exclusive = value.startsWith('Nenhum');
+      const exclusive = value.startsWith('Ningun') || value.startsWith('Nenhum');
       return {
         ...prev,
         [id]: checked
           ? exclusive
             ? [value]
-            : [...list.filter(x => !x.startsWith('Nenhum')), value]
+            : [...list.filter(x => !x.startsWith('Ningun') && !x.startsWith('Nenhum')), value]
           : list.filter(x => x !== value),
       };
     });
@@ -82,16 +82,21 @@ export function FunnelProvider({ children }: { children: React.ReactNode }) {
 
   const score = useMemo(() => {
     const negative = [
+      'Con frecuencia',
       'Frequentemente',
+      'Sí',
       'Sim',
+      'Casi todos los días',
       'Quase todos os dias',
+      'Baja casi todo el día',
       'Baixa durante quase todo o dia',
+      'Hace más de 1 año',
       'Há mais de 1 ano',
     ];
     let n = 0;
     Object.values(answers).forEach(v => {
       if (Array.isArray(v)) n += Math.min(v.length, 4);
-      else if (negative.some(x => v.includes(x))) n += 2;
+      else if (negative.some(x => typeof v === 'string' && v.includes(x))) n += 2;
       else n += 1;
     });
     return Math.min(88, 45 + n);
@@ -101,19 +106,19 @@ export function FunnelProvider({ children }: { children: React.ReactNode }) {
     const trimmed = name.trim();
     return trimmed
       ? trimmed.charAt(0).toUpperCase() + trimmed.slice(1).toLowerCase()
-      : 'Você';
+      : 'Tú';
   }, [name]);
 
   const resultGoal = useMemo(() => {
     return typeof answers.goal === 'string'
       ? answers.goal
-      : 'sentir seu corpo mais leve';
+      : 'sentir tu cuerpo más liviano';
   }, [answers.goal]);
 
   const priorities = useMemo(() => {
     return Array.isArray(answers.priorities)
-      ? answers.priorities.slice(0, 2).join(' e ').toLowerCase()
-      : 'ter mais disposição';
+      ? answers.priorities.slice(0, 2).join(' y ').toLowerCase()
+      : 'tener más energía y vitalidad';
   }, [answers.priorities]);
 
   return (
