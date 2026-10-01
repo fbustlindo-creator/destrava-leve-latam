@@ -279,10 +279,11 @@ main.screen-in{animation:none}
   margin: 6px 0 18px;
 }
 .g1-header-bar {
-  background: #0a0a0a;
+  background: #ffffff;
   width: 100%;
   line-height: 0;
   display: block;
+  border-bottom: 1px solid #e5e7eb;
 }
 .g1-header-img {
   width: 100%;
